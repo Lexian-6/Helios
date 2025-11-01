@@ -41,11 +41,11 @@ Each record corresponds to a snapshot of the vessel’s propulsion and energy st
 | Column | Description |
 |:--|:--|
 | `mission_time` | Mission timestamp (local ship time). |
-| `ship_speed_kps` | Ship’s velocity (km/s). |
-| `reactor_output_MA` | Main reactor output current (mega-ampere). |
-| `reactor_voltage_kV` | Reactor bus voltage (kV). |
-| `stellar_irradiance_Wm2` | Incoming stellar irradiance (W/m²). |
-| `collector_A_MW`, `collector_B_MW`, `collector_C_MW` | Output from three independent radiant-energy collectors (MW). |
+| `ship_speed_kps` | Ship velocity (km/s). |
+| `reactor_output_A` | Main reactor output current (A). |
+| `reactor_voltage_V` | Reactor bus voltage (V). |
+| `stellar_irradiance_Wm2` | Incident stellar irradiance (W/m²). |
+| `collector_A_W`, `collector_B_W`, `collector_C_W` | Output from three independent radiant-energy collectors (W). |
 | `helio_remaining_energy` | Remaining Helios-core energy reserve (arbitrary units). |
 | `orbital_inclination_deg` | Orbital inclination (°). |
 | `orbital_longitude_deg` | Orbital longitude (°). |
@@ -57,8 +57,15 @@ Each record corresponds to a snapshot of the vessel’s propulsion and energy st
 ---
 
 ### Mission Objective
-Develop a physically-consistent model capable of estimating the spacecraft’s **energy consumption and recharge dynamics**.
-Then, use that model to **predict the end-of-cycle Helio Remaining Energy** for Cycle 3, when the ship has fully completed its planned trajectory and come to rest.
+1. Explore and interpret Cycles 1–2 telemetry to understand **energy inflow and outflow dynamics**.  
+2. Identify relationships between propulsion load, stellar irradiance, and collector performance.  
+3. Develop a model that can **predict the evolution of `helio_remaining_energy`** over time for Cycle 3.  
+4. Estimate the **end-of-cycle energy reserve** once the vessel completes its trajectory and powers down.
+
+While analysing, you are encouraged to:
+- Report **any anomalies or inconsistencies** in the telemetry (e.g., sensor drift, missing values, unrealistic transients).  
+- Discuss potential **physical explanations** behind these behaviours.  
+- Balance **data-driven modelling** with **physics-based reasoning**.
 
 ---
 
@@ -74,9 +81,10 @@ Then, use that model to **predict the end-of-cycle Helio Remaining Energy** for 
 ### Deliverables
 Submit a single **Python notebook (`.ipynb`)** containing:
 - Data exploration for Cycles 1–2  
-- Modelling and justification (energy inflow/outflow estimation)  
+- Modelling and justification
 - Predicted `helio_remaining_energy` curve for Cycle 3  
 - A single numeric estimate: **End-of-Cycle Energy Reserve**  
 
 > **Good luck, Cadet.**  
 > *The Helios-V will sail the void on the strength of your models.*
+
